@@ -1,0 +1,9 @@
+[Unit]
+Description="Disable GPP0 to fix suspend issue"
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/bash -c 'for dev in GPP0 GPP8; do grep -q "$dev.*enabled" /proc/acpi/wakeup && echo $dev > /proc/acpi/wakeup; done'
+
+[Install]
+WantedBy=multi-user.target
